@@ -1,0 +1,6 @@
+anthropic
+pdfplumber
+chromadb
+sentence-transformers
+streamlit
+pydantic
