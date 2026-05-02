@@ -811,10 +811,13 @@ if st.session_state.report:
     # Download
     st.markdown("<br>", unsafe_allow_html=True)
     report_json = json.dumps(report.model_dump(), indent=2)
-    st.code(report_json[:300] + "\n...", language="json")
-    st.caption(
-        "Full report saved to contradiction_report.json"
-    )
+    st.code(report_json[:300] + "...", language="json")
+    st.download_button(
+        "Download Full Report (JSON)",
+        data=report_json,
+        file_name="contradiction_report.json",
+        mime="application/json"
+)
 
     # Chat section
     st.markdown("<hr>", unsafe_allow_html=True)
