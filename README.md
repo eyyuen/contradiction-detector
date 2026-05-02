@@ -24,7 +24,12 @@ Tested on DBS Group Holdings quarterly financial reports (3Q25 and 4Q25), the sy
 
 These are real discrepancies in publicly available financial documents — demonstrating the system works on complex, real-world data.
 
+![Overview](assets/screenshot_overview.PNG)
+
+![Contradictions](assets/screenshot_list.PNG)
+
 ## System Architecture
+```
 PDF Upload (Streamlit UI)
 │
 ▼
@@ -57,6 +62,7 @@ RAG Chatbot (Claude API + ChromaDB)
 Semantic retrieval for relevant context
 Conversation history maintained
 Answers with source citations
+```
 
 ## Tech Stack
 
@@ -71,6 +77,7 @@ Answers with source citations
 | Pydantic | Typed data models |
 
 ## Project Structure
+```
 contradiction_detector/
 │
 ├── app.py                    ← Streamlit application
@@ -79,6 +86,7 @@ contradiction_detector/
 ├── .streamlit/
 │   └── config.toml           ← Dark theme configuration
 └── sample_docs/              ← DBS quarterly reports (demo data)
+```
 
 ## Setup and Running Locally
 
