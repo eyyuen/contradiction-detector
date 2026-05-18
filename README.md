@@ -98,11 +98,10 @@ cd contradiction-detector
 # Install dependencies
 pip install -r requirements.txt
 
-# Set your Anthropic API key
-export ANTHROPIC_API_KEY=your-api-key-here
-
 # Run the application
 streamlit run app.py
+
+# Enter your Anthropic API key in the sidebar when the app opens
 ```
 
 Open http://localhost:8501 in your browser.
