@@ -433,6 +433,8 @@ def analyse_contradictions(all_chunks, collection):
     contradictions = []
     contradiction_id = 0
     checked_pairs = set()
+    pairs_sent_to_claude = 0      
+    pairs_with_contradictions = 0
     progress = st.progress(0)
     status = st.empty()
     total_docs = len(doc_names)
@@ -461,6 +463,7 @@ def analyse_contradictions(all_chunks, collection):
                 checked_pairs.add(pair_key)
                 if similar_chunk["distance"] > 0.5:
                     continue
+                pairs_sent_to_claude += 1 
                 try:
                     result = detect_contradiction(
                         {
@@ -473,6 +476,7 @@ def analyse_contradictions(all_chunks, collection):
                 except Exception:
                     result = None
                 if result:
+                    pairs_with_contradictions += 1
                     contradiction_id += 1
                     contradictions.append(Contradiction(
                         contradiction_id=f"C{contradiction_id:03d}",
@@ -492,6 +496,13 @@ def analyse_contradictions(all_chunks, collection):
         progress.progress((doc_idx + 1) / total_docs)
     status.empty()
     progress.empty()
+    print(f"\n--- Pipeline Statistics ---")
+    print(f"Total chunks across all documents: {sum(len(c) for c in all_chunks.values())}")
+    print(f"Total chunks sampled: {sum(max(1, len(c) // 15) * (len(c) // max(1, len(c) // 15)) for c in all_chunks.values())}")
+    print(f"Total pairs sent to Claude: {pairs_sent_to_claude}")
+    print(f"Pairs with contradictions: {pairs_with_contradictions}")
+    if pairs_sent_to_claude > 0:
+        print(f"Contradiction rate: {pairs_with_contradictions/pairs_sent_to_claude*100:.1f}%")
     return ContradictionReport(
         generated_at=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         documents_analysed=doc_names,
