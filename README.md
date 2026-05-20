@@ -15,7 +15,7 @@ Most document review processes rely on manual comparison — slow, error-prone, 
 
 ## Demo
 
-Tested on DBS Group Holdings quarterly financial reports (3Q25 and 4Q25), the system identified **19 contradictions** including:
+Tested on DBS Group Holdings quarterly financial reports (3Q25 and 4Q25), the system identified between 15-20 contradictions per run including:
 
 - Historical figures restated without disclosure between quarterly reports
 - Net Interest Income figures differing for the same period across reports
@@ -136,6 +136,7 @@ Typed data contracts between pipeline stages prevent silent failures. If Claude 
 
 - Extraction quality depends on PDF structure — slide-based PDFs lose table context during text extraction
 - Similarity threshold (0.5) may miss some contradictions in loosely worded documents — tunable per use case
+- The number varies slightly between runs because of chunk sampling — typically between 15 and 20 contradictions on our test documents. For consistent results a production version would process all chunks with caching.
 - Currently runs locally only — Streamlit Cloud deployment planned
 - Future: support for Word documents and plain text files
 - Future: contradiction confidence scoring
