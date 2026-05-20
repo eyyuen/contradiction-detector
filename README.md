@@ -28,6 +28,10 @@ These are real discrepancies in publicly available financial documents — demon
 
 ![Contradictions](assets/screenshot_list.PNG)
 
+![Examples](assets/contradiction_examples.png)
+
+![Transcript](assets/chatbot_transcript.png)
+
 ## System Architecture
 ```
 PDF Upload (Streamlit UI)
