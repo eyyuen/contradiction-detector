@@ -4,7 +4,7 @@
 
 A RAG-powered application that automatically detects contradictions across multiple PDF documents and provides an AI chatbot for querying document content with source citations. Built with Python, Anthropic Claude API, ChromaDB, and Streamlit.
 
-**Live Demo:** Tested on real DBS Group Holdings quarterly financial reports (3Q25 and 4Q25), identifying 19 critical contradictions including restated figures and conflicting metrics for identical reporting periods.
+**Live Demo:** Tested on real DBS Group Holdings quarterly financial reports (3Q25 and 4Q25), identified between 15-20 contradictions per run including restated figures and conflicting metrics for identical reporting periods.
 
 **GitHub:** https://github.com/eyyuen/contradiction-detector
 
@@ -284,6 +284,8 @@ class ContradictionReport(BaseModel):
 
 **Current limitations:**
 - Chunk sampling means contradictions in unsampled chunks may be missed
+- Results vary between runs due to chunk sampling — the system samples a maximum of 15 chunks per document rather than processing all chunks, and different samples surface different contradiction pairs.
+  Typical runs on the DBS test documents identify between 15-20 contradictions.
 - Slide-based PDFs lose table and chart context during text extraction — numbers appear without labels
 - Runs locally only, requires local setup
 
