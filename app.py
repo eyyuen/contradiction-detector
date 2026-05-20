@@ -498,7 +498,8 @@ def analyse_contradictions(all_chunks, collection):
     progress.empty()
     print(f"\n--- Pipeline Statistics ---")
     print(f"Total chunks across all documents: {sum(len(c) for c in all_chunks.values())}")
-    print(f"Total chunks sampled: {sum(max(1, len(c) // 15) * (len(c) // max(1, len(c) // 15)) for c in all_chunks.values())}")
+    actual_sampled = sum(len(chunks[::max(1, len(chunks) // 15)]) for chunks in all_chunks.values())
+    print(f"Total chunks sampled: {actual_sampled}")
     print(f"Total pairs sent to Claude: {pairs_sent_to_claude}")
     print(f"Pairs with contradictions: {pairs_with_contradictions}")
     if pairs_sent_to_claude > 0:
